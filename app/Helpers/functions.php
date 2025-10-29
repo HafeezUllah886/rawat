@@ -282,18 +282,17 @@ function updateSaleAmount($id){
 function todaySale(){
     $Date = Carbon::now()->format('Y-m-d');
     $sales = sale_details::whereDate('date', $Date)->get();
+   
 
     $total = 0;
-    $discount = 0;
-   $lastItem = end($sales); // get the last element of the array or collection
+   
+    foreach($sales as $item)
+    {
+        $total += $item->qty * ($item-> price - $item->discount);
+       
 
-foreach ($sales as $item) {
-    $total += $item->qty * ($item->price - $item->discount);
-
-    if ($item === $lastItem) {
-        $discount += $item->bill->discount;
     }
-}
+    $discount =  sale::whereDate('date', $Date)->sum('discount');
     return $total - $discount;
 }
 
