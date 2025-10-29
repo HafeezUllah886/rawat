@@ -285,11 +285,15 @@ function todaySale(){
 
     $total = 0;
     $discount = 0;
-    foreach($sales as $item)
-    {
-        $total += $item->qty * ($item-> price - $item->discount);
+   $lastItem = end($sales); // get the last element of the array or collection
+
+foreach ($sales as $item) {
+    $total += $item->qty * ($item->price - $item->discount);
+
+    if ($item === $lastItem) {
         $discount += $item->bill->discount;
     }
+}
     return $total - $discount;
 }
 
