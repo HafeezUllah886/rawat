@@ -239,7 +239,7 @@ class productController extends Controller
             $daily_prices[$purchase->date] = $purchase->rate;
         }
         foreach ($sales as $sale) {
-            $daily_prices[$sale->date] = $sale->price;
+            $daily_prices[$sale->date] = $sale->price - $sale->discount;
         }
 
         $total_purchase_amount = 0;
