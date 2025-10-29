@@ -31,6 +31,7 @@
                         </thead>
                         <tbody>
                             @foreach ($products as $product)
+                            @if($product->availStock <= $product->alert)
                             @php
                                 if($product->availStock <= $product->alert)
                                 {
@@ -45,6 +46,7 @@
                                 <td> {{ $product->alert }} </td>
                                 <td style="color:{{$color}};"> {{ $product->availStock }} </td>
                             </tr>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>
