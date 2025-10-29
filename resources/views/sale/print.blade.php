@@ -114,6 +114,7 @@
                     <tr>
                         <th class="text-left">Qty</th>
                         <th class="text-left">Price</th>
+                        <th class="text-left">Disc</th>
                         <th>Amount</th>
                     </tr>
                 </thead>
@@ -126,19 +127,22 @@
                     @endphp
                    @foreach ($details as $item)
                    @php
-                       $price = $item->price - $item->discount;
-                       $total += $price * $item->qty;
+                       $price = $item->price;
+                       $discount = $item->discount;
+                       $amount = $price * $item->qty;
+                       $total += $amount;
                        $items += 1;
                        $qty += $item->qty;
-                       $discount += $item->discount;
+                      
                    @endphp
                             <tr>
-                                <td colspan="3" class="uppercase">{{ $item->product->name }}</td>
+                                <td colspan="4" class="uppercase">{{ $item->product->name }}</td>
                             </tr>
                             <tr class="bottom-border">
                                 <td >{{ $item->qty }}</td>
                                 <td>{{ round($price, 0) }}</td>
-                                <td class="text-right">{{ round($price * $item->qty,0)}}</td>
+                                <td>{{ round($discount, 0) }}</td>
+                                <td class="text-right">{{ round($amount,0)}}</td>
                             </tr>
                    @endforeach
                    <tr>
