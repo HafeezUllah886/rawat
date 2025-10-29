@@ -284,12 +284,13 @@ function todaySale(){
     $sales = sale_details::whereDate('date', $Date)->get();
 
     $total = 0;
+    $discount = 0;
     foreach($sales as $item)
     {
         $total += $item->qty * ($item-> price - $item->discount);
-        $total -= $item->bill->discount;
+        $discount += $item->bill->discount;
     }
-    return $total;
+    return $total - $discount;
 }
 
 function todayPurchase(){
