@@ -286,7 +286,7 @@ function todaySale(){
     $total = 0;
     foreach($sales as $item)
     {
-        $total += $item->qty * $item-> price;
+        $total += $item->qty * ($item-> price - $item->discount);
         $total -= $item->bill->discount;
     }
     return $total;
