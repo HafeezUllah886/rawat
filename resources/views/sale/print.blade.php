@@ -129,7 +129,7 @@
                    @php
                        $price = $item->price;
                        $discount = $item->discount;
-                       $amount = $price * $item->qty;
+                       $amount = ($price - $discount) * $item->qty;
                        $total += $amount;
                        $items += 1;
                        $qty += $item->qty;
